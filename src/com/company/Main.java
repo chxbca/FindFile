@@ -11,7 +11,7 @@ public class Main {
         File file = new File(path);
         FileTree fileTree = new FileTree(file);
 
-        fileTree.show();
+//        fileTree.show();
 
         System.out.println("搜索路径  ：" + path);
         System.out.println("搜索文件名：" + fileName);
