@@ -73,13 +73,13 @@ class FileTree {
     }
 
     private void add2HashMap(Node<File> node) {
-        String value = node.item.getName();
-        if (hashMap.get(value) == null) {
+        String key = node.item.getName();
+        if (hashMap.get(key) == null) {
             HashSet<Node<File>> hashSet = new HashSet<>();
             hashSet.add(node);
-            hashMap.put(value, hashSet);
+            hashMap.put(key, hashSet);
         } else {
-            hashMap.get(value).add(node);
+            hashMap.get(key).add(node);
         }
     }
 
