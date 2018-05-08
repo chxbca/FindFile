@@ -48,16 +48,12 @@ class FileTree {
     }//前序遍历
 
     private void showNext(Node<File> node) {
-        try {
-            Node<File>[] next = node.nextTree;
-            for (Node<File> fileNode : next) {
-                System.out.println(fileNode.item);
-                if (fileNode.item.isDirectory()) {
-                    showNext(fileNode);
-                }
+        Node<File>[] next = node.nextTree;
+        for (Node<File> fileNode : next) {
+            System.out.println(fileNode.item);
+            if (fileNode.item.isDirectory()) {
+                showNext(fileNode);
             }
-        } catch (NullPointerException e) {
-            System.err.println("无法访问该目录 " + node.item);
         }
     }
 
@@ -74,12 +70,13 @@ class FileTree {
 
     private void add2HashMap(Node<File> node) {
         String key = node.item.getName();
-        if (hashMap.get(key) == null) {
-            HashSet<Node<File>> hashSet = new HashSet<>();
-            hashSet.add(node);
-            hashMap.put(key, hashSet);
+        HashSet<Node<File>> value = hashMap.get(key);
+        if (value == null) {
+            value = new HashSet<>();
+            value.add(node);
+            hashMap.put(key, value);
         } else {
-            hashMap.get(key).add(node);
+            value.add(node);
         }
     }
 
@@ -97,5 +94,4 @@ class FileTree {
             return item.toString();
         }
     }
-
 }
