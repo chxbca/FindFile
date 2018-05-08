@@ -29,7 +29,7 @@ class FileTree {
             Node<File>[] nodes = new Node[num];
             for (int i = 0; i < num; i++) {
                 nodes[i] = new Node<>(files[i]);
-//                nodes[i].prev = node;
+                nodes[i].prev = node;
                 add2HashMap(nodes[i]);
                 if (files[i].isDirectory()) {
                     addFile(nodes[i]);
@@ -82,7 +82,7 @@ class FileTree {
 
     private static class Node<E> {
         private E item;
-        //        private Node<E> prev;
+        private Node<E> prev;
         private Node<E>[] nextTree;
 
         private Node(E data) {
