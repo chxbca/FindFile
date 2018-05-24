@@ -9,7 +9,7 @@ import java.util.Map;
 
 class FileTree {
     private final Node<File> root;
-    private final PrintWriter out = new PrintWriter("out\\production\\FindFile\\com\\company\\Log.txt");
+    private final PrintWriter out = new PrintWriter("log.txt");
     private final Map<String, HashSet<Node<File>>> hashMap = new HashMap<>(4096);
 
     FileTree(File file) throws IOException {
@@ -59,12 +59,9 @@ class FileTree {
 
     boolean search(String fileName) {
         HashSet<Node<File>> hashSet = hashMap.get(fileName);
-        if (hashSet == null) {
+        if (hashSet == null)
             return false;
-        }
-        for (Node node : hashSet) {
-            System.out.println(node);
-        }
+        hashSet.forEach(x -> System.out.println(x));
         return true;
     }
 
