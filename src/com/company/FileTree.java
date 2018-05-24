@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 class FileTree {
     private final Node<File> root;
@@ -49,6 +50,9 @@ class FileTree {
 
     private void showNext(Node<File> node) {
         Node<File>[] next = node.nextTree;
+        if (next == null)
+            return;
+
         for (Node<File> fileNode : next) {
             System.out.println(fileNode.item);
             if (fileNode.item.isDirectory()) {
@@ -57,12 +61,8 @@ class FileTree {
         }
     }
 
-    boolean search(String fileName) {
-        HashSet<Node<File>> hashSet = hashMap.get(fileName);
-        if (hashSet == null)
-            return false;
-        hashSet.forEach(System.out::println);
-        return true;
+    Set<Node<File>> search(String fileName) {
+        return hashMap.get(fileName);
     }
 
     private void add2HashMap(Node<File> node) {

@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 
 public class Main {
 
@@ -18,12 +19,16 @@ public class Main {
 
         System.out.println("搜索路径  ：" + path);
         System.out.println("搜索文件名：" + fileName);
-        start = System.currentTimeMillis();
-        if (!fileTree.search(fileName)) {
-            System.out.println("File Not Found");
-        }
-        end = System.currentTimeMillis();
-        System.out.printf("搜索时间为:%d毫秒%n", end - start);
 
+        start = System.currentTimeMillis();
+        Collection<?> foundFile = fileTree.search(fileName);
+        end = System.currentTimeMillis();
+
+        if (foundFile == null) {
+            System.out.println("搜索结果为空");
+        } else {
+            foundFile.forEach(System.out::println);
+        }
+        System.out.printf("搜索时间为:%d毫秒%n", end - start);
     }
 }
