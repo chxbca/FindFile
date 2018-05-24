@@ -7,7 +7,7 @@ import java.util.Collection;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        String path = "C:\\Program Files";
+        String path = "C:\\Program Files\\Java";
         String fileName = "java.exe";
         File file = new File(path);
         long start = System.currentTimeMillis();
@@ -25,7 +25,7 @@ public class Main {
         end = System.currentTimeMillis();
 
         if (foundFile == null) {
-            System.out.println("搜索结果为空");
+            System.out.println("File Not Found");
         } else {
             foundFile.forEach(System.out::println);
         }

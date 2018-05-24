@@ -11,7 +11,7 @@ import java.util.Set;
 class FileTree {
     private final Node<File> root;
     private final PrintWriter out = new PrintWriter("log.txt");
-    private final Map<String, HashSet<Node<File>>> hashMap = new HashMap<>(4096);
+    private final Map<String, Set<Node<File>>> hashMap = new HashMap<>(4096);
 
     FileTree(File file) throws IOException {
         root = new Node<>(file);
@@ -20,7 +20,7 @@ class FileTree {
         out.close();
     }
 
-    private void addFile(final Node<File> node) {
+    private void addFile(Node<File> node) {
         try {
             File[] files = node.item.listFiles();
             if (files == null)
@@ -61,13 +61,13 @@ class FileTree {
         }
     }
 
-    Set<Node<File>> search(String fileName) {
+    Set search(String fileName) {
         return hashMap.get(fileName);
     }
 
     private void add2HashMap(Node<File> node) {
         String key = node.item.getName();
-        HashSet<Node<File>> value = hashMap.get(key);
+        Set<Node<File>> value = hashMap.get(key);
         if (value == null) {
             value = new HashSet<>();
             value.add(node);
