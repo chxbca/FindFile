@@ -61,7 +61,7 @@ class FileTree {
         HashSet<Node<File>> hashSet = hashMap.get(fileName);
         if (hashSet == null)
             return false;
-        hashSet.forEach(x -> System.out.println(x));
+        hashSet.forEach(System.out::println);
         return true;
     }
 
