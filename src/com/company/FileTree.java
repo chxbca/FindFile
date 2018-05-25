@@ -3,15 +3,15 @@ package com.company;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 class FileTree {
     private final Node<File> root;
     private final PrintWriter out = new PrintWriter("log.txt");
-    private final Map<String, Set<Node<File>>> hashMap = new HashMap<>(4096);
+    private final Map<String, Collection<Node<File>>> hashMap = new HashMap<>(4096);
 
     FileTree(File file) throws IOException {
         root = new Node<>(file);
@@ -50,9 +50,6 @@ class FileTree {
 
     private void showNext(Node<File> node) {
         Node<File>[] next = node.nextTree;
-        if (next == null)
-            return;
-
         for (Node<File> fileNode : next) {
             System.out.println(fileNode.item);
             if (fileNode.item.isDirectory()) {
@@ -61,13 +58,13 @@ class FileTree {
         }
     }
 
-    Set search(String fileName) {
+    Collection<Node<File>> search(String fileName) {
         return hashMap.get(fileName);
     }
 
     private void add2HashMap(Node<File> node) {
         String key = node.item.getName();
-        Set<Node<File>> value = hashMap.get(key);
+        Collection<Node<File>> value = hashMap.get(key);
         if (value == null) {
             value = new HashSet<>();
             value.add(node);
