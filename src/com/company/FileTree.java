@@ -3,10 +3,8 @@ package com.company;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class FileTree {
     private final Node<File> root;
@@ -58,8 +56,8 @@ class FileTree {
         }
     }
 
-    Collection<Node<File>> search(String fileName) {
-        return hashMap.get(fileName);
+    List<File> search(String fileName) {
+        return hashMap.get(fileName).stream().map(Node::getItem).collect(Collectors.toList());
     }
 
     private void add2HashMap(Node<File> node) {
@@ -81,6 +79,10 @@ class FileTree {
 
         private Node(E data) {
             this.item = data;
+        }
+
+        E getItem() {
+            return item;
         }
 
         @Override
