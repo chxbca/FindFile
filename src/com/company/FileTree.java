@@ -57,7 +57,11 @@ class FileTree {
     }
 
     List<File> search(String fileName) {
-        return hashMap.get(fileName).stream().map(Node::getItem).collect(Collectors.toList());
+        Collection<Node<File>> nodes = hashMap.get(fileName);
+        if (nodes == null) {
+            nodes = new HashSet<>();
+        }
+        return nodes.parallelStream().map(e -> e.item).collect(Collectors.toList());
     }
 
     private void add2HashMap(Node<File> node) {
@@ -79,15 +83,6 @@ class FileTree {
 
         private Node(E data) {
             this.item = data;
-        }
-
-        E getItem() {
-            return item;
-        }
-
-        @Override
-        public String toString() {
-            return item.toString();
         }
     }
 }

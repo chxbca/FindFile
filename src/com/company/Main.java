@@ -14,10 +14,9 @@ public class Main {
         System.out.println("搜索路径  ：" + path);
         System.out.println("搜索文件名：" + fileName);
         List<File> foundFile = fileTree.search(fileName);
-        if (foundFile == null) {
+        if (foundFile.size() == 0)
             System.out.println("File Not Found");
-        } else {
+        else
             foundFile.forEach(System.out::println);
-        }
     }
 }
