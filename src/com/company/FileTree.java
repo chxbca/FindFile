@@ -21,8 +21,9 @@ class FileTree {
     private void addFile(Node<File> node) {
         try {
             File[] files = node.item.listFiles();
-            if (files == null)
+            if (files == null) {
                 return;
+            }
             int num = files.length;
             @SuppressWarnings("unchecked")
             Node<File>[] nodes = new Node[num];
@@ -59,7 +60,7 @@ class FileTree {
     List<File> search(String fileName) {
         Collection<Node<File>> nodes = hashMap.get(fileName);
         if (nodes == null) {
-            nodes = new HashSet<>();
+            return new ArrayList<>();
         }
         return nodes.parallelStream().map(e -> e.item).collect(Collectors.toList());
     }

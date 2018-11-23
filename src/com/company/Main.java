@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author chxbca
+ */
 public class Main {
 
     public static void main(String[] args) throws IOException {
@@ -14,9 +17,10 @@ public class Main {
         System.out.println("搜索路径  ：" + path);
         System.out.println("搜索文件名：" + fileName);
         List<File> foundFile = fileTree.search(fileName);
-        if (foundFile.size() == 0)
+        if (foundFile.size() == 0) {
             System.out.println("File Not Found");
-        else
+        } else {
             foundFile.forEach(System.out::println);
+        }
     }
 }
